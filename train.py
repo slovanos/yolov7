@@ -503,7 +503,8 @@ def train(hyp, opt, device, tb_writer=None):
 
         # Strip optimizers
         final = best if best.exists() else last  # final model
-        for f in last, best:
+        logger.info('Stripping optimizers...')
+        for f in wdir.glob('*.pt'):
             if f.exists():
                 strip_optimizer(f)  # strip optimizers
         if opt.bucket:
